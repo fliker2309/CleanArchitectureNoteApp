@@ -29,18 +29,18 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideRepository(db: NoteDatabase): NoteRepository {
+    fun provideNoteRepository(db: NoteDatabase): NoteRepository {
         return NoteRepositoryImpl(db.dao)
     }
 
     @Provides
     @Singleton
-    fun provideUseCases(repository: NoteRepository): NoteUseCases {
+    fun provideNoteUseCases(repository: NoteRepository): NoteUseCases {
         return NoteUseCases(
             deleteNote = DeleteNote(repository),
-            addNote = AddNote(repository),
+            getNotes = GetNotes(repository),
             getNoteById = GetNoteById(repository),
-            getNotes = GetNotes(repository)
+            addNote = AddNote(repository)
         )
     }
 }
